@@ -27,7 +27,7 @@ export function ResultCard({ result }: ResultCardProps) {
               {result.board}
             </Badge>
             <Badge
-              variant={result.passed ? 'default' : 'destructive'}
+              variant={result.passed ? 'success' : 'destructive'}
               className="font-semibold"
             >
               {result.passed ? 'PASSED' : 'FAILED'}
@@ -35,13 +35,13 @@ export function ResultCard({ result }: ResultCardProps) {
           </div>
         </div>
       </CardHeader>
-      <CardContent className="p-0">
-        <div className="grid grid-cols-1 divide-y md:grid-cols-3 md:divide-x md:divide-y-0">
-          <div className="p-4">
-            <p className="text-sm font-semibold text-muted-foreground">
+      <CardContent className="p-4 print:p-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 print:grid-cols-3">
+          {/* Student Details */}
+          <div className="rounded-lg bg-blue-50 p-4 dark:bg-blue-950/50">
+            <h3 className="mb-2 font-semibold text-black dark:text-blue-300">
               Student Details
-            </p>
-            <Separator className="my-2" />
+            </h3>
             <div className="space-y-2">
               <InfoRow label="Name" value={result.studentName} />
               <InfoRow label="Roll Number" value={result.roll} />
@@ -49,27 +49,31 @@ export function ResultCard({ result }: ResultCardProps) {
               <InfoRow label="Date of Birth" value={formatDate(result.dob)} />
             </div>
           </div>
-          <div className="p-4">
-            <p className="text-sm font-semibold text-muted-foreground">
+
+          {/* Parent Details */}
+          <div className="rounded-lg bg-green-50 p-4 dark:bg-green-950/50">
+            <h3 className="mb-2 font-semibold text-black dark:text-green-300">
               Parent Details
-            </p>
-            <Separator className="my-2" />
+            </h3>
             <div className="space-y-2">
               <InfoRow label="Father's Name" value={result.fatherName} />
               <InfoRow label="Mother's Name" value={result.motherName} />
             </div>
           </div>
-          <div className="p-4">
-            <p className="text-sm font-semibold text-muted-foreground">
+
+          {/* Academic Details */}
+          <div className="rounded-lg bg-purple-50 p-4 dark:bg-purple-950/50">
+            <h3 className="mb-2 font-semibold text-black dark:text-purple-300">
               Academic Details
-            </p>
-            <Separator className="my-2" />
+            </h3>
             <div className="space-y-2">
               <InfoRow label="Institution" value={result.institutionName} />
               <InfoRow label="Group/Stream" value={result.group} />
               <InfoRow label="Candidate Type" value={result.candidateType} />
-              <div>
-                <span className="text-base font-bold">GPA: </span>
+              <div className="mt-2 rounded-md bg-white p-2 dark:bg-black/20">
+                <span className="text-base font-bold text-black dark:text-purple-300">
+                  GPA:{' '}
+                </span>
                 <span className="text-base font-semibold">
                   {result.gpa.toFixed(2)}
                 </span>
@@ -84,9 +88,9 @@ export function ResultCard({ result }: ResultCardProps) {
 
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
-    <div>
-      <span className="text-sm font-medium">{label}: </span>
-      <span className="text-sm">{value}</span>
+    <div className="text-sm">
+      <span className="font-medium">{label}: </span>
+      <span>{value}</span>
     </div>
   );
 }

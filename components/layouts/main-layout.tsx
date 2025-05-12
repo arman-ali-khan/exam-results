@@ -16,7 +16,7 @@ export function MainLayout({ children }: MainLayoutProps) {
 
   return (
     <div className="flex min-h-screen flex-col">
-      <header className="sticky top-0 z-10 flex h-16 items-center border-b bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:px-6">
+      <header className="sticky top-0 z-10 flex h-16 items-center border-b bg-background/95 px-4 backdrop-blur supports-[backdrop-filter]:bg-background/60 md:px-6 print:hidden">
         <div className="flex w-full items-center justify-between">
           <div className="flex items-center gap-2">
             <Sheet open={open} onOpenChange={setOpen}>
@@ -52,7 +52,7 @@ export function MainLayout({ children }: MainLayoutProps) {
         </div>
       </header>
       <div className="flex flex-1">
-        <aside className="hidden w-64 shrink-0 border-r md:block">
+        <aside className="hidden w-64 shrink-0 border-r print:hidden md:block">
           <SettingsSidebar />
         </aside>
         <main className="flex-1">{children}</main>

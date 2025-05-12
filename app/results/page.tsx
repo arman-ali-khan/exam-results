@@ -101,7 +101,7 @@ export default function ResultsPage() {
 
   return (
     <MainLayout>
-      <div className="container mx-auto max-w-4xl py-8">
+      <div className="container mx-auto max-w-4xl py-8 print:py-0 print:max-w-none print-content">
         <div className="mb-6 flex items-center justify-between print:hidden">
           <Button variant="outline" size="sm" onClick={handleBack}>
             <ArrowLeft className="mr-2 h-4 w-4" />
@@ -113,7 +113,7 @@ export default function ResultsPage() {
           </Button>
         </div>
 
-        <div className="space-y-8">
+        <div className="space-y-8 print:space-y-4">
           <ResultCard result={result} />
           <GradeTable subjects={result.subjects} />
         </div>
