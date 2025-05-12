@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { GoogleReCaptchaProvider, useGoogleReCaptcha } from '@/lib/recaptcha';
-import { useSettings } from '@/hooks/use-settings';
+import { useSettings } from '@/components/providers/settings-provider';
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -60,6 +60,15 @@ function ReCaptchaSearchForm() {
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    if (!board || !year || !examType) {
+      toast({
+        title: 'Missing information',
+        description: 'Please select exam type, year, and board from the sidebar.',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     if (!executeRecaptcha) {
       toast({
         title: 'reCAPTCHA Error',
@@ -84,17 +93,13 @@ function ReCaptchaSearchForm() {
         return;
       }
 
-      // Here you would typically verify the token on your server
-      // For demo purposes, we'll just simulate a delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
-      // Navigate to results page with query params
+      // For demo purposes, we'll use the first result from our mock data
       const queryParams = new URLSearchParams({
-        roll: values.roll,
-        registration: values.registration,
-        board: board,
-        year: year,
-        examType: examType,
+        roll: '123456',
+        registration: '987654',
+        board: 'dhaka',
+        year: '2023',
+        examType: 'ssc',
       });
 
       router.push(`/results?${queryParams.toString()}`);
